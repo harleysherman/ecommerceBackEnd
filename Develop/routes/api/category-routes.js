@@ -10,8 +10,7 @@ router.get('/', (req, res) => {
     {include: [
     {  
       // be sure to include its associated Products
-      model: "product",
-      required: true //test if there isn't a product attached to category
+      model: Product,
     },
   ]})
   .then((data) => {
@@ -28,8 +27,7 @@ router.get('/:id', (req, res) => {
         },
         include: [
           {  // be sure to include its associated Products
-            model: "product",
-            required: true //test if there isn't a product attached to category
+            model: Product,
           }
         ]}
     )
@@ -54,7 +52,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a category by its `id` value
-  Category.update({ category_name: req.body }, {
+  Category.update(req.body, {
     where: {
       id: req.params.id
     }

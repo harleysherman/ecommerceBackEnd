@@ -10,9 +10,12 @@ router.get('/', (req, res) => {
     {include: [
     {  
       // be sure to include its associated Category and Tag data     
-      model: Product,
+      model: Tag,
       through: ProductTag,
     },
+    {
+      model: Category
+    }
   ]})
   .then((data) => {
     res.json(data);
@@ -31,8 +34,11 @@ router.get('/:id', (req, res) => {
       include: [
         {  
           // be sure to include its associated Category and Tag data
-          model: Product,
+          model: Tag,
           through: ProductTag,
+        },
+        {
+          model: Category
         }
       ]}
   )
@@ -123,7 +129,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete one product by its `id` value
-  Category.destroy({
+  Product.destroy({
     where: {
       id: req.params.id
     }
