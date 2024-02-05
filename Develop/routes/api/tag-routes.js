@@ -5,12 +5,12 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 router.get('/', (req, res) => {
   // find all tags
-  Category.findAll(
+  Tag.findAll(
     {include: [
       {  
         // be sure to include its associated Product data
-        model: "product",
-        required: true //test if there isn't a product attached to category
+        model: Product, 
+        through: ProductTag
       },
     ]
     }
@@ -25,7 +25,7 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
-  Category.findOne(  
+  Tag.findOne(  
     {
       where: {
         id: req.params.id
@@ -33,8 +33,8 @@ router.get('/:id', (req, res) => {
       include: [
         {  
           // be sure to include its associated Product data
-          model: "product",
-          required: true //test if there isn't a product attached to category
+          model: Product,
+          through: ProductTag,
         }
       ]}
   )
@@ -48,7 +48,7 @@ router.get('/:id', (req, res) => {
 
 router.post('/', (req, res) => {
   // create a new tag
-  Category.create(req.body)
+  Tag.create(req.body)
   .then((data) => {
     res.json(data);
   })
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
 
 router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
-  Category.update({ category_name: req.body }, {
+  Tag.update({ tag_name: req.body }, {
     where: {
       id: req.params.id
     }
@@ -74,7 +74,7 @@ router.put('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   // delete on tag by its `id` value
-  Category.destroy({
+  Tag.destroy({
     where: {
       id: req.params.id
     }

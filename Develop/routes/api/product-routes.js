@@ -10,8 +10,8 @@ router.get('/', (req, res) => {
     {include: [
     {  
       // be sure to include its associated Category and Tag data     
-      model: "product",
-      required: true //test if there isn't a product attached to category
+      model: Product,
+      through: ProductTag,
     },
   ]})
   .then((data) => {
@@ -31,8 +31,8 @@ router.get('/:id', (req, res) => {
       include: [
         {  
           // be sure to include its associated Category and Tag data
-          model: "product",
-          required: true //test if there isn't a product attached to category
+          model: Product,
+          through: ProductTag,
         }
       ]}
   )

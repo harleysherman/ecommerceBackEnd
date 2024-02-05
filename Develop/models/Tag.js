@@ -7,7 +7,7 @@ class Tag extends Model {}
 Tag.init(
   {
     // define columns
-    
+
     // id
     // Integer.
     // Doesn't allow null values.
@@ -22,7 +22,7 @@ Tag.init(
 
     // tag_name
     // String.
-    category_name: {
+    tag_name: {
       type: DataTypes.STRING,
     }
   },
