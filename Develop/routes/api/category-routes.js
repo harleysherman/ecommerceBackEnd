@@ -8,7 +8,8 @@ router.get('/', (req, res) => {
   // find all categories
   Category.findAll(  
     {include: [
-    {  // be sure to include its associated Products
+    {  
+      // be sure to include its associated Products
       model: "product",
       required: true //test if there isn't a product attached to category
     },
